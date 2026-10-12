@@ -145,3 +145,7 @@ Expected: `minimal` and `fanOutSilentlyDropsRepartitionAfterProcess` fail. The o
 - [KAFKA-18692](https://issues.apache.org/jira/browse/KAFKA-18692): proposes merging `repartitionRequired` and `GraphNode.keyChangingOperation`, the two flags that disagree here.
 - [KAFKA-9739](https://issues.apache.org/jira/browse/KAFKA-9739): same exception, different cause, fixed in 2.5.1 and 2.6.0.
 - [KAFKA-20264](https://issues.apache.org/jira/browse/KAFKA-20264): fixed a match overwrite in `findParentNodeMatching`, in 4.3.1. Does not affect this case.
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE).
