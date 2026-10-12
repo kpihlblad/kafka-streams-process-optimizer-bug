@@ -61,7 +61,7 @@ The fix is off by default because it changes existing optimized topologies. [KAF
 
    This can change the topology of a running app. Compare `Topology.describe()` first.
 
-2. Use `processValues()` if the key never changes and nothing is forwarded from a punctuator.
+2. Use `processValues()` if the key never changes and nothing is forwarded from a punctuator. A key-preserving processor that forwards from a punctuator, such as TTL tombstones for its own stored keys, has no API to say so. It must use `process()` and pay for a repartition it doesn't need.
 3. Set `topology.optimization=none`.
 
 ## Run
