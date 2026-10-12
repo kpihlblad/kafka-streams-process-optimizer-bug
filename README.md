@@ -9,8 +9,10 @@ The internal config `__enable.process.processValue.fix__=true` ([KAFKA-19668](ht
 
 Affected: Apache 4.1.2, 4.2.0, 4.3.1 and Confluent 8.2.4, 8.3.2 (`-ccs` and `-ce`). Trunk (4.5.0-SNAPSHOT, October 2026) has the same code as 4.3.1.
 
-## Exception
+## Failure modes
+There are two failure modes, one throwing an exception and one *silently* misses the repartition.
 
+### Exception
 ```java
 builder.<String, String>stream("in")
     .selectKey((k, v) -> v)
@@ -23,7 +25,7 @@ builder.build(props);           // throws
 
 It builds if optimization is off, `selectKey()` or the first `toTable()` is removed, `process()` becomes `selectKey()`, or the fix is on. A join or `merge()` before `process()` still throws.
 
-## Missing repartition
+### Missing repartition
 
 ```java
 KStream<String, String> rekeyed = builder.<String, String>stream("in")
@@ -40,7 +42,7 @@ rekeyed.process(KeyChanger::new, Named.as("proc"))   // new key
 | Optimization | `rekey → g1-repartition → proc → count(c2)` |
 | Optimization + fix | `rekey → proc → g2-repartition → count(c2)` |
 
-`c2` aggregates by the new key but is partitioned by the old one.
+`c2` aggregates by the new key but is partitioned by the *old* key.
 
 ## Cause
 
