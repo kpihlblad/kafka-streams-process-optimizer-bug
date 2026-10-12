@@ -7,6 +7,8 @@ With `topology.optimization=all`, Kafka Streams treats `KStream.process()` as if
 
 Both symptoms disappear with the internal config `__enable.process.processValue.fix__=true` ([KAFKA-19668](https://issues.apache.org/jira/browse/KAFKA-19668)). It defaults to `false`.
 
+## Testing
+
 Neither symptom needs a broker. The tests build the topology and inspect `Topology.describe()`.
 
 ## Affected versions
@@ -16,7 +18,7 @@ Neither symptom needs a broker. The tests build the topology and inspect `Topolo
 | Apache 4.1.2, 4.2.0, 4.3.1 | yes | yes |
 | Confluent 8.2.4-ccs, 8.2.4-ce, 8.3.2-ccs, 8.3.2-ce | yes | yes |
 
-Trunk (4.5.0-SNAPSHOT, October 2026) was compared at the source level and not built. The relevant code in `InternalStreamsBuilder` and `KStreamImpl` matches 4.3.1.
+The relevant code in `InternalStreamsBuilder` and `KStreamImpl` in Trunk (4.5.0-SNAPSHOT, October 2026) matches in 4.3.1.
 
 ## Symptom 1: exception at `build()`
 
